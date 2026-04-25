@@ -1,36 +1,19 @@
 #include <iostream>
 #include <vector>
+#include <eigen3/Eigen/Dense>
+
+using namespace Eigen;
 using namespace std;
 
 int main(void) {
-  int N;
-  vector<vector<int>> cost(1000000017, vector<int>(1000000017));
-  bool answer = false;
+    Matrix3d m;
 
-  cin >> N;
-  for (int i = 0; i < N - 1; i++) {
-    for (int j = i + 1; j < N; j++) {
-      cin >> cost.at(i).at(j);
-    }
-    cout << endl;
-  }
+    m << 1, 2, 3,
+         4, 5, 6,
+         7, 8, 9;
 
-  for (int a = 0; a < N - 2; a++) {
-    for (int b = a + 1; b < N - 1; b++) {
-      for (int c = b + 1; c < N; c++) {
-        int direct = cost.at(a).at(c);
-        int indirect = cost.at(a).at(b) + cost.at(b).at(c);
+    cout << "m" << m << endl;
+    cout << "m_inverse" << m.inverse() << endl;
 
-        if (direct > indirect) {
-          answer = true;
-          break;
-        }
-      }
-    }
-  }
-
-  if (answer) cout << "Yes" << endl;
-  else cout << "No" << endl;
-
-  return 0;
+    return 0;
 }
